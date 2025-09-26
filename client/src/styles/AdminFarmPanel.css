@@ -1,0 +1,112 @@
+.admin-farm-panel {
+  padding: 30px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background-color: #80b3e6;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form styles */
+.farm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.farm-form input,
+.farm-form button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.farm-form button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.farm-form button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.message {
+  text-align: center;
+  color: #155724;
+  margin-top: 10px;
+}
+
+/* Horizontal scrollable farm list */
+.farm-list {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 0;
+  white-space: nowrap;
+}
+
+/* Style scrollbar (optional) */
+.farm-list::-webkit-scrollbar {
+  height: 8px;
+}
+.farm-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+.farm-list::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+/* Each farm card */
+.farm-card {
+  flex: 0 0 auto;
+  width: 200px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.farm-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.farm-card button {
+  margin-top: 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Ensure full height and no horizontal cut-off */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

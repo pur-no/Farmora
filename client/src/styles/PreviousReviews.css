@@ -1,0 +1,28 @@
+.previous-reviews-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.review-item {
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0;
+}
+
+.question-block {
+  margin-bottom: 0.5rem;
+}
+
+.stars {
+  color: gold;
+  font-size: 1.2rem;
+}
+
+.stars .filled {
+  color: gold;
+}
+
+.review-text {
+  font-style: italic;
+  margin-top: 0.5rem;
+}

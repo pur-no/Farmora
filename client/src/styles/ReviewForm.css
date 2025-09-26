@@ -1,0 +1,97 @@
+/* ReviewForm.css */
+.review-container {
+  max-width: 720px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: rgba(143, 6, 6, 0.15);
+  border: 1px solid rgba(172, 12, 12, 0.25);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  transition: all 0.3s ease-in-out;
+}
+
+.review-container:hover {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+}
+
+textarea {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #6a82fb;
+  box-shadow: 0 0 8px rgba(106, 130, 251, 0.4);
+}
+
+.stars {
+  font-size: 2.2rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.stars span {
+  color: #d1d1d1;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.stars span:hover {
+  transform: scale(1.25);
+}
+
+.stars .filled {
+  color: #ffde59;
+  text-shadow: 0 0 6px rgba(255, 222, 89, 0.7);
+}
+
+button {
+  padding: 0.75rem 1.75rem;
+  background: linear-gradient(135deg, #6a82fb, #fc5c7d);
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(252, 92, 125, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 20px rgba(252, 92, 125, 0.6);
+}
+
+.review-list {
+  margin-top: 2.5rem;
+}
+
+.review-item {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1.5rem 0;
+  transition: background 0.3s ease, transform 0.2s ease;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+.review-item:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
