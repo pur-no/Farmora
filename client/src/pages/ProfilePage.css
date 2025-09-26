@@ -1,0 +1,45 @@
+/* client/src/pages/ProfilePage.css */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f4f4f4;
+  min-height: 80vh;
+}
+
+.profile-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+.profile-card h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-info:last-child {
+  border-bottom: none;
+}
+
+.profile-info strong {
+  color: #555;
+}
+
+.user-role {
+  text-transform: capitalize;
+  font-weight: bold;
+  color: #007bff;
+}

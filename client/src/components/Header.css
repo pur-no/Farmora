@@ -21,6 +21,7 @@
   padding: 0;
   display: flex;
   gap: 1.5rem;
+  align-items: center;
 }
 
 .header nav a {
@@ -31,4 +32,25 @@
 
 .header nav a:hover {
   text-decoration: underline;
+}
+
+.welcome-user {
+  margin-right: 1rem;
+  font-weight: 500;
+}
+
+.logout-button {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.logout-button:hover {
+  background-color: white;
+  color: #2c3e50;
 }
