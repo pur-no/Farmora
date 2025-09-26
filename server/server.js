@@ -7,7 +7,8 @@ import connectDB from './config/db.js';
 // Import routes
 import helloRoutes from './routes/helloRoutes.js';
 import productRoutes from './routes/productRoutes.js';
-import userRoutes from './routes/userRoutes.js'; // Import user routes
+import userRoutes from './routes/userRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js'; // Import upload routes
 
 // Load environment variables
 dotenv.config();
@@ -25,7 +26,8 @@ app.use(express.json());
 // Use Routes
 app.use('/api/hello', helloRoutes);
 app.use('/api/products', productRoutes);
-app.use('/api/users', userRoutes); // Use user routes
+app.use('/api/users', userRoutes);
+app.use('/api/upload', uploadRoutes); // Use upload routes
 
 const PORT = process.env.PORT || 5000;
 

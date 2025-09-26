@@ -9,6 +9,11 @@ const productSchema = new mongoose.Schema(
       trim: true,
       maxLength: [100, 'Product name cannot exceed 100 characters'],
     },
+    // Add the image field here
+    image: {
+      type: String,
+      required: [true, 'Please upload a product image'],
+    },
     price: {
       type: Number,
       required: [true, 'Please provide a product price'],
@@ -24,18 +29,9 @@ const productSchema = new mongoose.Schema(
       required: [true, 'Please select a category for this product'],
       enum: {
         values: [
-          'Electronics',
-          'Cameras',
-          'Laptops',
-          'Accessories',
-          'Headphones',
-          'Food',
-          'Books',
-          'Clothes/Shoes',
-          'Beauty/Health',
-          'Sports',
-          'Outdoor',
-          'Home',
+          'Electronics', 'Cameras', 'Laptops', 'Accessories', 'Headphones',
+          'Food', 'Books', 'Clothes/Shoes', 'Beauty/Health', 'Sports',
+          'Outdoor', 'Home',
         ],
         message: 'Please select a valid category',
       },
@@ -78,7 +74,7 @@ const productSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
-      required: false, // This can be made required later when you have user auth
+      required: false,
     },
   },
   {

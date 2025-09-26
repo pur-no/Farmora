@@ -1,10 +1,9 @@
 // client/src/components/Footer.jsx
 import React from 'react';
-import './Footer.css';
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="bg-gray-800 text-white text-center p-4 mt-auto">
       <p>&copy; {new Date().getFullYear()} Farmora. All rights reserved.</p>
     </footer>
   );
