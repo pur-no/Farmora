@@ -15,7 +15,12 @@ const Header = () => {
 
   const authLinks = (
     <>
-      <span className="welcome-user">Welcome, {user?.name}</span>
+      <li>
+        <Link to="/dashboard">Dashboard</Link>
+      </li>
+      <span className="welcome-user">
+        <Link to="/profile">Welcome, {user?.name}</Link>
+      </span>
       <li>
         <button onClick={handleLogout} className="logout-button">
           Logout

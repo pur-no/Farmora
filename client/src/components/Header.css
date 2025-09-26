@@ -39,6 +39,15 @@
   font-weight: 500;
 }
 
+/* Make the welcome message a link */
+.welcome-user a {
+  color: white;
+  text-decoration: none;
+}
+.welcome-user a:hover {
+  text-decoration: underline;
+}
+
 .logout-button {
   background: none;
   border: 1px solid white;
