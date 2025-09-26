@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Organic Tomato Seeds",
+    "price": 5.99,
+    "description": "High-quality, non-GMO organic tomato seeds. Perfect for home gardens and small farms. Produces juicy, flavorful tomatoes.",
+    "category": "Food",
+    "seller": "Green Thumb Supplies",
+    "stock": 150,
+    "ratings": 4.5
+  },
+  {
+    "name": "Heavy-Duty Garden Hoe",
+    "price": 25.50,
+    "description": "A durable garden hoe with a solid oak handle and a sharp, carbon steel blade. Ideal for weeding and cultivating soil.",
+    "category": "Outdoor",
+    "seller": "Farmhand Tools",
+    "stock": 75,
+    "ratings": 4.8
+  },
+  {
+    "name": "All-Purpose Plant Fertilizer",
+    "price": 15.00,
+    "description": "A balanced, all-purpose fertilizer that promotes healthy growth for a wide variety of plants, vegetables, and flowers.",
+    "category": "Home",
+    "seller": "Green Thumb Supplies",
+    "stock": 200,
+    "ratings": 4.3
+  },
+  {
+    "name": "Watering Can (2 Gallon)",
+    "price": 12.99,
+    "description": "A sturdy 2-gallon watering can with a detachable sprinkler head. Made from weather-resistant plastic.",
+    "category": "Accessories",
+    "seller": "Farmhand Tools",
+    "stock": 120,
+    "ratings": 4.0
+  },
+  {
+    "name": "Heirloom Carrot Seeds",
+    "price": 4.50,
+    "description": "A mix of colorful heirloom carrot seeds including purple, yellow, and white varieties. Fun for the whole family.",
+    "category": "Food",
+    "seller": "Green Thumb Supplies",
+    "stock": 300,
+    "ratings": 4.6
+  },
+  {
+    "name": "Leather Work Gloves",
+    "price": 19.95,
+    "description": "Durable and comfortable leather work gloves to protect your hands during tough farm and garden tasks.",
+    "category": "Clothes/Shoes",
+    "seller": "Farmhand Tools",
+    "stock": 90,
+    "ratings": 4.9
+  }
+]
