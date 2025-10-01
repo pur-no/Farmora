@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../components/Spinner';
+import { toast } from 'react-hot-toast'; // Import toast
 
 const DashboardPage = () => {
   const [products, setProducts] = useState([]);
@@ -17,7 +18,9 @@ const DashboardPage = () => {
           setProducts(data.data);
         }
       } catch (err) {
-        setError('Failed to fetch your products.');
+        const message = 'Failed to fetch your products.';
+        setError(message);
+        toast.error(message); // Error toast
         console.error(err);
       } finally {
         setLoading(false);
@@ -28,30 +31,22 @@ const DashboardPage = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this product?')) {
-      try {
-        const res = await axios.delete(`http://localhost:5000/api/products/${id}`);
-        if (res.data.success) {
-          setProducts(products.filter((p) => p._id !== id));
-          alert('Product deleted successfully!');
-        }
-      } catch (err) {
-        alert('Failed to delete product.');
-        console.error(err);
-      }
-    }
+    // We can use toast.promise for a nice loading state
+    const deletePromise = axios.delete(`http://localhost:5000/api/products/${id}`);
+
+    toast.promise(deletePromise, {
+       loading: 'Deleting product...',
+       success: () => {
+         setProducts(products.filter((p) => p._id !== id));
+         return <b>Product deleted!</b>;
+       },
+       error: <b>Could not delete product.</b>,
+     });
   };
+
 
   if (loading) {
     return <Spinner />;
-  }
-
-  if (error) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <p className="text-red-500 text-lg">{error}</p>
-      </div>
-    );
   }
 
   return (

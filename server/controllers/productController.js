@@ -2,12 +2,15 @@
 import Product from '../models/productModel.js';
 
 /**
- * @desc    Get all products with optional search and filter
+ * @desc    Get all products with search, filter, and pagination
  * @route   GET /api/products
  * @access  Public
  */
 export const getProducts = async (req, res) => {
   try {
+    const pageSize = 8; // Number of products per page
+    const page = Number(req.query.pageNumber) || 1;
+
     const { keyword, category } = req.query;
     const query = {};
 
@@ -18,15 +21,20 @@ export const getProducts = async (req, res) => {
       };
     }
 
-    if (category) {
+    if (category && category !== 'All') {
       query.category = category;
     }
 
-    const products = await Product.find(query);
+    const count = await Product.countDocuments(query);
+    const products = await Product.find(query)
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+
     res.status(200).json({
       success: true,
-      count: products.length,
       data: products,
+      page,
+      pages: Math.ceil(count / pageSize), // Total number of pages
     });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
@@ -40,9 +48,7 @@ export const getProducts = async (req, res) => {
  */
 export const newProduct = async (req, res) => {
   try {
-    // Add the logged-in user's ID to the request body
     req.body.user = req.user._id;
-
     const product = await Product.create(req.body);
     res.status(201).json({
       success: true,
@@ -94,7 +100,6 @@ export const updateProduct = async (req, res) => {
       });
     }
 
-    // Check if the user is the owner of the product or an admin
     if (product.user.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
       return res.status(401).json({ success: false, message: 'Not authorized to update this product' });
     }
@@ -129,7 +134,6 @@ export const deleteProduct = async (req, res) => {
       });
     }
 
-    // Check if the user is the owner of the product or an admin
     if (product.user.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
         return res.status(401).json({ success: false, message: 'Not authorized to delete this product' });
     }

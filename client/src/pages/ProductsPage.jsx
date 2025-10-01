@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
 import Spinner from '../components/Spinner';
+import Pagination from '../components/Pagination'; // Import the Pagination component
 import { useSearchParams } from 'react-router-dom';
 
 const categories = [
@@ -15,10 +16,14 @@ const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(1);
   
   const [searchParams, setSearchParams] = useSearchParams();
-  const [keyword, setKeyword] = useState(searchParams.get('keyword') || '');
-  const [category, setCategory] = useState(searchParams.get('category') || 'All');
+  
+  const keyword = searchParams.get('keyword') || '';
+  const category = searchParams.get('category') || 'All';
+  const pageNumber = searchParams.get('pageNumber') || 1;
 
   const fetchProducts = useCallback(async () => {
     setLoading(true);
@@ -27,10 +32,13 @@ const ProductsPage = () => {
       const params = new URLSearchParams();
       if (keyword) params.append('keyword', keyword);
       if (category && category !== 'All') params.append('category', category);
+      params.append('pageNumber', pageNumber);
 
       const { data } = await axios.get(`http://localhost:5000/api/products?${params.toString()}`);
       if (data.success) {
         setProducts(data.data);
+        setPage(data.page);
+        setPages(data.pages);
       }
     } catch (err) {
       setError('Failed to fetch products. Please try again later.');
@@ -38,7 +46,7 @@ const ProductsPage = () => {
     } finally {
       setLoading(false);
     }
-  }, [keyword, category]);
+  }, [keyword, category, pageNumber]);
 
   useEffect(() => {
     fetchProducts();
@@ -46,12 +54,15 @@ const ProductsPage = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setSearchParams({ keyword, category });
+    setSearchParams({ keyword, category, pageNumber: 1 });
   };
   
   const handleCategoryClick = (cat) => {
-    setCategory(cat);
-    setSearchParams({ keyword, category: cat });
+    setSearchParams({ keyword, category: cat, pageNumber: 1 });
+  };
+
+  const handlePageChange = (newPage) => {
+    setSearchParams({ keyword, category, pageNumber: newPage });
   };
 
   return (
@@ -61,13 +72,15 @@ const ProductsPage = () => {
           Our Products
         </h1>
         
-        {/* Search Bar */}
         <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-8">
           <div className="relative">
             <input
               type="search"
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
+              defaultValue={keyword}
+              onChange={(e) => setSearchParams(prev => {
+                prev.set('keyword', e.target.value);
+                return prev;
+              }, { replace: true })}
               placeholder="Search for products..."
               className="w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500"
             />
@@ -77,7 +90,6 @@ const ProductsPage = () => {
           </div>
         </form>
 
-        {/* Category Filters */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
           {categories.map((cat) => (
             <button
@@ -99,18 +111,23 @@ const ProductsPage = () => {
                 <p className="text-red-500 text-lg">{error}</p>
             </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.length > 0 ? (
-              products.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))
-            ) : (
-              <div className="text-center col-span-full py-16">
-                <h3 className="text-xl font-semibold text-gray-700">No Products Found</h3>
-                <p className="text-gray-500 mt-2">Try adjusting your search or filter criteria.</p>
-              </div>
-            )}
-          </div>
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {products.length > 0 ? (
+                products.map((product) => (
+                  <ProductCard key={product._id} product={product} />
+                ))
+              ) : (
+                <div className="text-center col-span-full py-16">
+                  <h3 className="text-xl font-semibold text-gray-700">No Products Found</h3>
+                  <p className="text-gray-500 mt-2">Try adjusting your search or filter criteria.</p>
+                </div>
+              )}
+            </div>
+            <div className="mt-12 flex justify-center">
+              <Pagination pages={pages} page={page} onPageChange={handlePageChange} />
+            </div>
+          </>
         )}
       </div>
     </div>

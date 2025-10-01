@@ -1,6 +1,7 @@
 // client/src/context/AuthContext.jsx
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-hot-toast'; // Import toast
 
 const AuthContext = createContext();
 
@@ -19,7 +20,6 @@ export const AuthProvider = ({ children }) => {
         setUser(JSON.parse(storedUser));
         setToken(storedToken);
         setIsAuthenticated(true);
-        // Set the token in axios headers for all subsequent requests
         axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
       }
       setLoading(false);
@@ -42,11 +42,13 @@ export const AuthProvider = ({ children }) => {
         setUser(res.data.user);
         setIsAuthenticated(true);
         axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+        toast.success(`Welcome back, ${res.data.user.name}!`); // Success toast
       }
       return res.data;
     } catch (err) {
-      console.error(err);
-      return { success: false, message: err.response?.data?.message || 'Login failed' };
+      const message = err.response?.data?.message || 'Login failed';
+      toast.error(message); // Error toast
+      return { success: false, message };
     }
   };
 
@@ -65,11 +67,13 @@ export const AuthProvider = ({ children }) => {
         setUser(res.data.user);
         setIsAuthenticated(true);
         axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+        toast.success(`Welcome, ${res.data.user.name}! Account created.`); // Success toast
       }
       return res.data;
     } catch (err) {
-      console.error(err);
-      return { success: false, message: err.response?.data?.message || 'Registration failed' };
+      const message = err.response?.data?.message || 'Registration failed';
+      toast.error(message); // Error toast
+      return { success: false, message };
     }
   };
 
@@ -80,6 +84,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setIsAuthenticated(false);
     delete axios.defaults.headers.common['Authorization'];
+    toast.success('You have been logged out.'); // Logout toast
   };
 
   return (
