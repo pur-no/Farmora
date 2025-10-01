@@ -26,9 +26,25 @@ const Header = () => {
     </li>
   );
 
+  const adminLinks = user?.role === 'admin' && (
+    <div className="relative group">
+       <button className="py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 flex items-center">
+         Admin Menu <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/></svg>
+       </button>
+       <div className="absolute z-10 hidden group-hover:block bg-white rounded-lg shadow w-44">
+           <ul className="py-2 text-sm text-gray-700">
+               <li><Link to="/admin/users" className="block px-4 py-2 hover:bg-gray-100">Manage Users</Link></li>
+               <li><Link to="/admin/products" className="block px-4 py-2 hover:bg-gray-100">Manage Products</Link></li>
+           </ul>
+       </div>
+    </div>
+  );
+
   const authLinks = (
     <>
+      {adminLinks}
       <NavLink to="/dashboard">Dashboard</NavLink>
+      <NavLink to="/weather">Weather</NavLink>
       <li className="hidden md:block text-gray-400">|</li>
       <li className="mt-2 md:mt-0">
         <div className="flex items-center gap-2">

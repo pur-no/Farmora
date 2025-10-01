@@ -8,7 +8,9 @@ import connectDB from './config/db.js';
 import helloRoutes from './routes/helloRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
-import uploadRoutes from './routes/uploadRoutes.js'; // Import upload routes
+import uploadRoutes from './routes/uploadRoutes.js';
+import weatherRoutes from './routes/weatherRoutes.js';
+import adminRoutes from './routes/adminRoutes.js'; // Import admin routes
 
 // Load environment variables
 dotenv.config();
@@ -27,7 +29,9 @@ app.use(express.json());
 app.use('/api/hello', helloRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/upload', uploadRoutes); // Use upload routes
+app.use('/api/upload', uploadRoutes);
+app.use('/api/weather', weatherRoutes);
+app.use('/api/admin', adminRoutes); // Use admin routes
 
 const PORT = process.env.PORT || 5000;
 
