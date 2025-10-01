@@ -2,13 +2,27 @@
 import Product from '../models/productModel.js';
 
 /**
- * @desc    Get all products
+ * @desc    Get all products with optional search and filter
  * @route   GET /api/products
  * @access  Public
  */
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find({});
+    const { keyword, category } = req.query;
+    const query = {};
+
+    if (keyword) {
+      query.name = {
+        $regex: keyword,
+        $options: 'i', // 'i' for case-insensitivity
+      };
+    }
+
+    if (category) {
+      query.category = category;
+    }
+
+    const products = await Product.find(query);
     res.status(200).json({
       success: true,
       count: products.length,
